@@ -1,0 +1,21 @@
+{
+  "name": "com.niou-ns.barcodecamera",
+  "version": "1.0.0",
+  "description": "Cordova Barcode Camera Plugin",
+  "cordova": {
+    "id": "com.niou-ns.barcodecamera",
+    "platforms": [
+      "ios",
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "camera",
+    "barcode",
+    "scanner",
+    "cordova-ios",
+  ],
+  "devDependencies": {
+    "plist": "*"
+  }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin
+    xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="com.niou-ns.barcodecamera"
+    version="1.0.0">
+
+    <name>Barcode Camera</name>
+    <license>MIT</license>
+    <keywords>barcode</keywords>
+    <repo>https://github.com/niou-ns/cordova-plugin-barcodescanner</repo>
+
+    <engines>
+        <engine name="cordova" version=">=2.9.0" />
+    </engines>
+
+    <js-module src="www/ios/barcodeCamera.js" name="barcodeCamera">
+        <clobbers target="window.barcodeCamera" />
+    </js-module>
+
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/widget">
+            <feature name="BarcodeCamera">
+                <param name="ios-package" value="BarcodeCamera" onload="true"/>
+            </feature>
+        </config-file>
+
+        <!-- Resource Bundle -->
+        <resource-file src="src/ios/BarcodeCamera.bundle"/>
+        <!-- Use Settings.bundle when you're note using SalesforceSDK -->
+        <!-- You need those configs, without it you won't have vibration or sound at all -->
+        <!-- <resource-file src="src/ios/Settings.bundle" /> -->
+
+        <header-file src="src/ios/BarcodeCamera.h" target-dir="BarcodeCamera" />
+        <source-file src="src/ios/BarcodeCamera.m" target-dir="BarcodeCamera" />
+
+        <!-- frameworks -->
+        <framework src="Foundation.framework" weak="true" />
+        <framework src="AVFoundation.framework" weak="true" />
+        <framework src="AudioToolbox.framework" weak="true" />
+        <framework src="UIKit.framework" weak="true" />
+
+        <!-- Customize hooks if you already have some Settings.bundle -->
+        <hook type="before_plugin_install" src="scripts/beforeInstall.js" />
+        <hook type="before_plugin_uninstall" src="scripts/beforeUninstall.js" />
+
+    </platform>
+</plugin>
