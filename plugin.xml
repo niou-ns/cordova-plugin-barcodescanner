@@ -29,7 +29,7 @@
         <resource-file src="src/ios/BarcodeCamera.bundle"/>
         <!-- Use Settings.bundle when you're note using SalesforceSDK -->
         <!-- You need those configs, without it you won't have vibration or sound at all -->
-        <!-- <resource-file src="src/ios/Settings.bundle" /> -->
+         <resource-file src="src/ios/Settings.bundle" /> 
 
         <header-file src="src/ios/BarcodeCamera.h" target-dir="BarcodeCamera" />
         <source-file src="src/ios/BarcodeCamera.m" target-dir="BarcodeCamera" />
@@ -41,8 +41,8 @@
         <framework src="UIKit.framework" weak="true" />
 
         <!-- Customize hooks if you already have some Settings.bundle -->
-        <hook type="before_plugin_install" src="scripts/beforeInstall.js" />
-        <hook type="before_plugin_uninstall" src="scripts/beforeUninstall.js" />
+<!--        <hook type="before_plugin_install" src="scripts/beforeInstall.js" />-->
+<!--        <hook type="before_plugin_uninstall" src="scripts/beforeUninstall.js" />-->
 
     </platform>
 </plugin>
