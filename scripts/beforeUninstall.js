@@ -25,14 +25,29 @@ module.exports = function (context) {
       var obj = plist.parse(xml);
 
       for (var i = 0; i < obj.PreferenceSpecifiers.length; i++) {
-        if (obj.PreferenceSpecifiers[i].Title === 'Scanner') {
+        if (obj.PreferenceSpecifiers[i].Title === 'Scanner' || obj.PreferenceSpecifiers[i].Title === 'SCANNER_TITLE') {
           obj.PreferenceSpecifiers.splice(i, 3);
           break;
         }
       }
-
-      xml = plist.build(obj);
-      fs.writeFileSync(FILEPATH, xml, { encoding: 'utf8' });
+      if (!obj.PreferenceSpecifiers.length > 0) {
+        var path = 'platforms/ios/' + projectName + '/Resources/Settings.bundle';
+        
+        if( fs.existsSync(path) ) {
+          fs.readdirSync(path).forEach(function(file,index){
+            var curPath = path + "/" + file;
+            if(fs.lstatSync(curPath).isDirectory()) {
+              deleteFolderRecursive(curPath);
+            } else {
+              fs.unlinkSync(curPath);
+            }
+          });
+          fs.rmdirSync(path);
+        }
+      } else {
+        xml = plist.build(obj);
+        fs.writeFileSync(FILEPATH, xml, { encoding: 'utf8' });
+      }
     }
 
 };
