@@ -30,20 +30,24 @@ module.exports = function (context) {
           break;
         }
       }
+      
       if (!obj.PreferenceSpecifiers.length > 0) {
-        var path = 'platforms/ios/' + projectName + '/Resources/Settings.bundle';
-        
-        if( fs.existsSync(path) ) {
-          fs.readdirSync(path).forEach(function(file,index){
-            var curPath = path + "/" + file;
-            if(fs.lstatSync(curPath).isDirectory()) {
-              deleteFolderRecursive(curPath);
-            } else {
-              fs.unlinkSync(curPath);
-            }
-          });
-          fs.rmdirSync(path);
+        var deleteFolderRecursive = function(path) {
+          if( fs.existsSync(path) ) {
+            fs.readdirSync(path).forEach(function(file,index){
+              var curPath = path + "/" + file;
+              if(fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+              } else { // delete file
+                fs.unlinkSync(curPath);
+              }
+            });
+            fs.rmdirSync(path);
+          }
         }
+        var path = 'platforms/ios/' + projectName + '/Resources/Settings.bundle';
+        deleteFolderRecursive(path);
+
       } else {
         xml = plist.build(obj);
         fs.writeFileSync(FILEPATH, xml, { encoding: 'utf8' });
